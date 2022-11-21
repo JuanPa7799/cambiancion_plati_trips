@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:app/User/provider/event_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:app/User/bloc/bloc_user.dart';
@@ -6,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart'
     show Firebase, FirebaseOptions;
 import 'package:app/User/ui/screens/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,13 +22,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          // home: PlatziTripsCupertino()
-          home: SignInScreen(),
-        ),
-        bloc: UserBloc());
+    return ChangeNotifierProvider(
+      create: ((context) => EventProvider()),
+      child: BlocProvider(
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            // home: PlatziTripsCupertino()
+            home: SignInScreen(),
+          ),
+          bloc: UserBloc()),
+    );
   }
 }
 
