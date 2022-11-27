@@ -5,6 +5,7 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:app/User/bloc/bloc_user.dart';
 import 'Place/ui/screens/home_trips.dart';
 import 'User/ui/screens/profile_trips.dart';
+import 'package:app/User/ui/screens/tareas_del_dia.dart';
 
 class PlatziTripsCupertino extends StatelessWidget {
   @override
@@ -12,21 +13,20 @@ class PlatziTripsCupertino extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Colors.indigo), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search, color: Colors.indigo), label: "Search"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person, color: Colors.indigo), label: "Profile"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today_sharp, color: Colors.indigo),
+              label: "Itinerario"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_month_outlined, color: Colors.indigo),
+              label: "Agregar"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.person, color: Colors.indigo), label: "Perfil"),
         ]),
         tabBuilder: (BuildContext context, int index) {
           switch (index) {
             case 0:
               return CupertinoTabView(
-                builder: (BuildContext context) {
-                  return BlocProvider<UserBloc>(
-                      child: HomeTrips(), bloc: UserBloc());
-                },
+                builder: (BuildContext context) => Tareas_Del_dia(),
               );
             //break;
             case 1:
